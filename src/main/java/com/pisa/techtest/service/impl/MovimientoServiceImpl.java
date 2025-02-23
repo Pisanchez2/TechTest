@@ -57,6 +57,10 @@ public class MovimientoServiceImpl implements MovimientoService {
 
         double valor = movimientoDTO.getValor();
 
+        if (valor == 0) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Valor no puede ser 0");
+        }
+
         if (saldo + valor < 0) {
             throw new ResponseStatusException(HttpStatus.CONFLICT, "Saldo insuficiente");
         }
