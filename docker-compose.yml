@@ -11,7 +11,12 @@ services:
       - mysql_data:/var/lib/mysql
     networks:
       - springboot-mysql-network
-  
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
   
   app:
     image: openjdk:17-jdk-slim
@@ -26,7 +31,9 @@ services:
     ports:
       - "8080:8080"
     depends_on:
-      - mysql
+      mysql:
+        condition: service_healthy
+
     networks:
       - springboot-mysql-network
 

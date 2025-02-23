@@ -1,8 +1,8 @@
-CREATE SCHEMA techTestDB;
+CREATE SCHEMA IF NOT EXISTS techTestDB;
 
 USE techTestDB;
 
-CREATE TABLE persona
+CREATE TABLE IF NOT EXISTS persona
 (
     id             BIGINT PRIMARY KEY AUTO_INCREMENT,
     nombre         VARCHAR(255) NOT NULL,
@@ -13,7 +13,7 @@ CREATE TABLE persona
     telefono       VARCHAR(255) NOT NULL
 );
 
-CREATE TABLE cliente
+CREATE TABLE IF NOT EXISTS cliente
 (
     id         BIGINT PRIMARY KEY,
     contraseña VARCHAR(255) NOT NULL,
@@ -21,7 +21,7 @@ CREATE TABLE cliente
     FOREIGN KEY (id) REFERENCES persona (id)
 );
 
-create table cuenta
+create table IF NOT EXISTS cuenta
 (
     id            bigint auto_increment
         primary key,
@@ -36,7 +36,7 @@ create table cuenta
         foreign key (cliente_id) references cliente (id)
 );
 
-CREATE TABLE movimiento
+CREATE TABLE IF NOT EXISTS movimiento
 (
     id              BIGINT PRIMARY KEY AUTO_INCREMENT,
     fecha           TIMESTAMP    NOT NULL,
